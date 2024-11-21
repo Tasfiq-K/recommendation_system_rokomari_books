@@ -64,4 +64,20 @@ def fix_more_categories_issue(row):
 
     return text
 
+def correct_author_names(row):
+    """
+    The unicode range between \u0980 - \u09FF defines the Bangla characters
+    and digits in the Unicode character set
+    """
+    return re.sub(r'[^\u0980-\u09FF ]+', '', str(row)).strip()
+
+
+def translate_to_bangla(row):
+    return GoogleTranslator(source='auto', target='bn').translate(text=str(row))
+
+def translate_from_id(row):
+    return GoogleTranslator(source='en', target='bn').translate(text=str(row))
+
+
+
 # ------------------------------
